@@ -1,30 +1,28 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "sole.hpp"
+
+#include "lib_uuid_node.hpp"
 
 #include <thread>
 #include <string>
 #include <mutex>
 
-ros::NodeHandle* node;
-
-int main(int argc, char **argv)
+uuid_msgs::UniqueID libuuid::create_uuid()
 {
-	/**
-	 * The ros::init() function needs to see argc and argv so that it can perform
-	 * any ROS arguments and name remapping that were provided at the command line.
-	 * For programmatic remappings you can use a different version of init() which takes
-	 * remappings directly, but for most command-line programs, passing argc and argv is
-	 * the easiest way to do it.  The third argument to init() is the name of the node.
-	 *
-	 * You must call one of the versions of ros::init() before using any other
-	 * part of the ROS system.
-	 */
-	ros::init(argc, argv, "lib_uuid_node");
+    uuid_msgs::UniqueID out;
 
-	ros::NodeHandle n;
+    sole::uuid u = sole::uuid0();
 
-	node = &n;
+    for( int i = 0; i < 8; i++ )
+    {
+        out.uuid[i] = u.ab >> (i*8);
+    }
 
-	ros::spin();
-	return 0;
+    for( int i = 0; i < 8; i++ )
+    {
+        out.uuid[i+8] = u.cd >> (i*8);
+    }
+
+    return out;
 }
