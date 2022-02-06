@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 set(PROJECT_NAME "lib_uuid_node")
-set(LIBRARY_NAME "lib_uuid_node")
+set(LIBRARY_NAME "lib_uuid")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(${PROJECT_NAME})
@@ -14,7 +14,7 @@ catkin_package(
 )
 
 include_directories(
-  include
+  #include
  ${catkin_INCLUDE_DIRS}
 )
 
@@ -30,6 +30,10 @@ add_library(${LIBRARY_NAME} ${executable_sources})
 target_include_directories(${LIBRARY_NAME} PUBLIC "include")
 target_link_libraries(${LIBRARY_NAME} ${catkin_LIBRARIES} Threads::Threads)
 add_dependencies(${LIBRARY_NAME} ${${LIBRARY_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+#############
+## Install ##
+#############
 
 ## Mark executables and/or libraries for installation
 install(TARGETS ${LIBRARY_NAME}

@@ -2,7 +2,7 @@
 #include "std_msgs/String.h"
 #include "sole.hpp"
 
-#include "lib_uuid_node.hpp"
+#include "lib_uuid/lib_uuid.hpp"
 
 #include <thread>
 #include <string>
